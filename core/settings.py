@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Local 
     'books',
+    'quiz',
+    
     # 3rd party
     'graphene_django',
 
