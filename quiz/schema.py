@@ -29,8 +29,11 @@ class Query(graphene.ObjectType):
     
     all_category = graphene.List(CategoryType)
     all_quiz = graphene.List(QuizessType)
-    all_questions = graphene.List(QuestionType)
-    all_answer = graphene.List(AnswerType)
+    # all_questions = graphene.List(QuestionType)
+    # all_answer = graphene.List(AnswerType)
+
+    all_questions = graphene.Field(QuestionType, id=graphene.Int())
+    all_answer = graphene.Field(AnswerType, id=graphene.Int())
 
     def resolve_all_category(self, info):
         return Category.objects.all()
@@ -38,11 +41,12 @@ class Query(graphene.ObjectType):
     def resolve_all_quiz(self, info):
         return Quizzes.objects.all()
 
-    def resolve_all_questions(self, info):
-        return Question.objects.all()
+    def resolve_all_questions(self, info, id):
+        # return Question.objects.all()
+        return Question.objects.get(pk=id)
 
-    def resolve_all_answer(self, info):
-        return Answer.objects.all()
+    def resolve_all_answer(self, info, id):
+        # return Answer.objects.all()
+        return Answer.objects.get(pk=id)
 
-    
 schema = graphene.Schema(query=Query)
