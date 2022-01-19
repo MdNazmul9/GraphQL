@@ -1,4 +1,6 @@
 from dataclasses import field
+from typing_extensions import Required
+from unicodedata import category
 import graphene
 
 from graphene_django import DjangoObjectType
@@ -26,7 +28,6 @@ class AnswerType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    
     all_category = graphene.List(CategoryType)
     all_quiz = graphene.List(QuizessType)
     # all_questions = graphene.List(QuestionType)
@@ -49,4 +50,19 @@ class Query(graphene.ObjectType):
         # return Answer.objects.all()
         return Answer.objects.filter(question=id)
 
-schema = graphene.Schema(query=Query)
+
+class CategoryMutation(graphene.Mutation):
+    class Arguments:
+        name = graphene.String(required=True)
+
+    category = graphene.Field(CategoryType) 
+    @classmethod
+    def mutate(cls, root, info, name):
+        category = Category(name=name)
+        category.save()
+        return CategoryMutation(category=category)
+
+class Mutation(graphene.ObjectType):
+    update_category = CategoryMutation.Field()
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
