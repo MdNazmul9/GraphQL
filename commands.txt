@@ -8,5 +8,6 @@ django-admin startproject core .
 
 python manage.py startapp users
 
+pip install django-graphql-jwt
 
 
