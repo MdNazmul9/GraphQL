@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'graphql_db',
         'USER': 'nazmul',
-        'PASSWORD': '123456',
+        'PASSWORD': '1234',
         'HOST':'localhost',
         'PORT': '5432',
        }
@@ -151,7 +151,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.ExtendUser'
 
-GRAPHINE = {
+GRAPHENE = {
     'SCHEMA': 'users.schema.schema',
     'MIDDLEWARE': [
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
