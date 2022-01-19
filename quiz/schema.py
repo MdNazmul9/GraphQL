@@ -33,7 +33,7 @@ class Query(graphene.ObjectType):
     # all_answer = graphene.List(AnswerType)
 
     all_questions = graphene.Field(QuestionType, id=graphene.Int())
-    all_answer = graphene.Field(AnswerType, id=graphene.Int())
+    all_answer = graphene.List(AnswerType, id=graphene.Int())
 
     def resolve_all_category(self, info):
         return Category.objects.all()
@@ -47,6 +47,6 @@ class Query(graphene.ObjectType):
 
     def resolve_all_answer(self, info, id):
         # return Answer.objects.all()
-        return Answer.objects.get(pk=id)
+        return Answer.objects.filter(question=id)
 
 schema = graphene.Schema(query=Query)
