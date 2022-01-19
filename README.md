@@ -41,3 +41,18 @@ mutation{
   }
 }
 ```
+
+#### Login user 
+```
+mutation{
+  tokenAuth(username: "mn48", password: "testpass1234"){
+    success
+    errors
+    token
+    refreshToken
+    user{
+      username
+    }
+  }
+}
+```
