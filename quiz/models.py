@@ -2,12 +2,12 @@ from unicodedata import category
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-class Category(models.Model):
+class Category(models.Model): # Admission, GOV JOB, BPSC, IT, NON Technical
     name = models.CharField(max_length=255)
     def __str__(self):
         return self.name
 
-class Quizzes(models.Model):
+class Quizzes(models.Model): # ICT, Math, Bangla, English etc
     title = models.CharField(max_length=255, default=_("New Quizz"))
     category = models.ForeignKey(Category, default=1, on_delete=models.DO_NOTHING)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -16,7 +16,7 @@ class Quizzes(models.Model):
         return self.title
 
     
-class Question(models.Model):
+class Question(models.Model): # Main Question, WH Question
     SCALE = (
         (0, _('Fundamental')),
         (1, _('Beginner')),
@@ -39,10 +39,10 @@ class Question(models.Model):
     def __str__(self):
         return  self.title
 
-class Answer(models.Model):
-    question = models.ForeignKey(Question, related_name="answer", on_delete=models.DO_NOTHING)
+class Answer(models.Model): # options and select right option
+    question = models.ForeignKey(Question, related_name="answer", on_delete=models.DO_NOTHING) # which question option it is???
     answer_text = models.CharField(max_length=255, verbose_name=_("Answer Text"))
-    is_right = models.BooleanField(default=False)
+    is_right = models.BooleanField(default=False) # which option is right
 
     def __str__(self):
         return self.answer_text
