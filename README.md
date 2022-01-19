@@ -56,3 +56,17 @@ mutation{
   }
 }
 ```
+
+#### Update
+
+```
+mutation{
+  updateAccount(firstName:"MdNazmulHossain")
+  {
+    success
+    errors
+  }
+}
+```
+
+# [Help](https://django-graphql-auth.readthedocs.io/en/latest/)
