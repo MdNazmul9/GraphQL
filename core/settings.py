@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'graphql_db',
         'USER': 'nazmul',
-        'PASSWORD': '123456',
+        'PASSWORD': '1234',
         'HOST':'localhost',
         'PORT': '5432',
        }
@@ -151,15 +151,31 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.ExtendUser'
 
-GRAPHINE = {
+GRAPHENE = {
     'SCHEMA': 'users.schema.schema',
     'MIDDLEWARE': [
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],
 }
 
+GRAPHQL_JWT={
+    "JWT_ALLOW_ANY_CLASSES": [
+        "graphql_auth.mutations.Register",
+        "graphql_auth.mutations.VerifyAccount",
+        "graphql_auth.mutations.ObtainJSONWebToken",
+        "graphql_auth.mutations.ResendActivationEmail",
+        "graphql_auth.mutations.SendPasswordResetEmail",
+        "graphql_auth.mutations.PasswordReset",
+    ],
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True
+}
+
+
 AUTHENTICATION_BACKENDS = [
     'graphql_auth.backends.GraphQLAuthBackend',
      # 'graphql_jwt.backends.JSONWebTokenBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]   
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
