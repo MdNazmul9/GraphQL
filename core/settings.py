@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'graphql_db',
         'USER': 'nazmul',
-        'PASSWORD': '1234',
+        'PASSWORD': '123456',
         'HOST':'localhost',
         'PORT': '5432',
        }
